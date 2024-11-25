@@ -22,6 +22,7 @@ timber = "5.0.1"
 annotation = "1.9.1"
 androidTools = "31.7.2"
 desugar_jdk_libs = "2.1.2"
+hiltNav = "1.2.0"
 
 
 # Project versions
@@ -66,6 +67,7 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android" , version.ref = "hilt"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hilt"}
+hilt-navigation = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNav"}
 desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 
 
@@ -114,7 +116,3 @@ compose-debug = [
 ]
 
 
-hilt = [
-    "hilt-android",
-    "hilt-compiler"
-]

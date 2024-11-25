@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_one_title">Manage your tasks</string>
+    <string name="onboarding_one_description">You can easily manage all of your daily tasks in DoMe for free</string>
+    <string name="onboarding_two_title">Create daily routine</string>
+    <string name="onboarding_two_description">In Uptodo  you can create your personalized routine to stay productive</string>
+    <string name="onboarding_three_title">Organize your tasks</string>
+    <string name="onboarding_three_description">You can organize your daily tasks by adding your tasks into separate categories</string>
+    <string name="back">Back</string>
+    <string name="skip">Skip</string>
+    <string name="welcome_to_uptodo">Welcome to UpTodo</string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="login_to_your_account">Please login to your account or create new account to continue</string>
+    <string name="login">LOGIN</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+</resources>
