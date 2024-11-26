@@ -5,15 +5,12 @@ package com.uuthman.auth.presentation.onboarding
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
@@ -43,10 +40,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingScreenRoot(
+    onClick: () -> Unit,
     viewModel: OnboardingViewModel = hiltViewModel()
 ) {
     OnboardingScreen(
         state = viewModel.state,
+        onClick = onClick
     )
 }
 
@@ -54,13 +53,16 @@ fun OnboardingScreenRoot(
 @Composable
 private fun OnboardingScreen(
     state: OnboardingState,
+    onClick: () -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = { state.onboarding.size})
 
     val scope = rememberCoroutineScope()
 
 
-    UpTodoBackground {
+    UpTodoBackground(
+        hasToolbar = false
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -75,7 +77,7 @@ private fun OnboardingScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .clickable {
-
+                        onClick()
                     }
             )
             OnboardingSlider(
@@ -118,12 +120,17 @@ private fun OnboardingScreen(
                UpTodoActionButton(
                    text = if(isLastPage) stringResource(R.string.get_started) else stringResource(R.string.next),
                    onClick = {
-                       if (pagerState.currentPage < pagerState.pageCount - 1) {
-                           scope.launch {
-                               pagerState
-                                   .animateScrollToPage(pagerState.currentPage + 1)
+                       if(isLastPage) {
+                           onClick()
+                       } else {
+                           if (pagerState.currentPage < pagerState.pageCount - 1) {
+                               scope.launch {
+                                   pagerState
+                                       .animateScrollToPage(pagerState.currentPage + 1)
+                               }
                            }
                        }
+
                    },
                    isLoading = false,
                    fillWidth = false
@@ -134,6 +141,7 @@ private fun OnboardingScreen(
 
     }
 }
+
 
 
 
@@ -154,8 +162,11 @@ private fun OnboardingScreenPreview() {
                         description = UiText.StringResource(R.string.onboarding_two_description),
                         image = R.drawable.onboarding_two
                     )
-                )
+                ),
             ),
+            onClick = {
+
+            }
         )
     }
 }

@@ -39,7 +39,9 @@ private fun WelcomeScreen(
     onRegister: () -> Unit
 ) {
 
-    UpTodoBackground {
+    UpTodoBackground(
+        hasToolbar = false
+    ) {
         Column(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
