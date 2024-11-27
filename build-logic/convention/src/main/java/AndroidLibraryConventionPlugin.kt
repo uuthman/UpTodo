@@ -24,11 +24,11 @@ class AndroidLibraryConventionPlugin: Plugin<Project> {
                     extensionType = ExtensionType.LIBRARY
 
                 )
-                
-                defaultConfig {
-                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                    consumerProguardFiles("consumer-rules.pro")
-                }
+//
+//                defaultConfig {
+//                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//                    consumerProguardFiles("consumer-rules.pro")
+//                }
 
             }
 

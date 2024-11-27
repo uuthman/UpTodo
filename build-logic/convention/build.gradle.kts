@@ -54,5 +54,20 @@ gradlePlugin {
             id = "uptodo.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+
+        register("test") {
+            id = "uptodo.test"
+            implementationClass = "TestConventionPlugin"
+        }
+
+        register("androidTest") {
+            id = "uptodo.android.test"
+            implementationClass = "AndroidTestConventionPlugin"
+        }
+
+        register("androidHiltTest") {
+            id = "uptodo.android.hilt.test"
+            implementationClass = "AndroidHiltTestConventionPlugin"
+        }
     }
 }

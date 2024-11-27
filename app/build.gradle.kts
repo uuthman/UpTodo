@@ -58,4 +58,6 @@ dependencies {
     implementation(projects.auth.presentation)
 
     implementation(projects.home.presentation)
+
+    androidTestImplementation(projects.common.androidTest)
 }
