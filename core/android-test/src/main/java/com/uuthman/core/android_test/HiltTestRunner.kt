@@ -1,4 +1,4 @@
-package com.uuthman.common.androidtest
+package com.uuthman.core.android_test
 
 import android.app.Application
 import android.content.Context

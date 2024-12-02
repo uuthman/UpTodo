@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.room) apply false
     alias(libs.plugins.hiltAndroid) apply false
+    alias(libs.plugins.mannodermaus.android.junit5) apply false
 }

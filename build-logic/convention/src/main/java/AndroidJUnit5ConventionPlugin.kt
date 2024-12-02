@@ -6,29 +6,30 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.exclude
 
-class AndroidTestConventionPlugin: Plugin<Project> {
+class AndroidJUnit5ConventionPlugin: Plugin<Project> {
 
     override fun apply(target: Project) {
         target.run {
 
-            configurations.getByName("androidTestImplementation") {
-                exclude(group = "io.mockk", module = "mockk-agent-jvm")
-            }
-
+            pluginManager.apply("uptodo.jvm.junit5")
+            pluginManager.apply("de.mannodermaus.android-junit5")
 
             extensions.configure<LibraryExtension> {
                 defaultConfig {
-                    testInstrumentationRunner = "com.uuthman.common.androidtest.HiltTestRunner"
+                    testInstrumentationRunner = "com.uuthman.core.android_test.HiltTestRunner"
                 }
             }
 
             dependencies {
-                "androidTestImplementation"(project.libs.findLibrary("androidx-junit").get())
-                "androidTestImplementation"(project.libs.findLibrary("androidx-junit-ext").get())
+                "androidTestImplementation"(libs.findLibrary("junit5.android.test.compose").get())
+
                 "androidTestImplementation"(project.libs.findLibrary("androidx-junit-runner").get())
                 "androidTestImplementation"(project.libs.findLibrary("androidx-test-core").get())
                 "androidTestImplementation"(project.libs.findLibrary("assert-k").get())
                 "androidTestImplementation"(project.libs.findLibrary("mockk").get())
+                "androidTestImplementation"(libs.findLibrary("coroutines.test").get())
+                "androidTestImplementation"(libs.findLibrary("turbine").get())
+                "androidTestImplementation"(project(":core:android-test"))
 
             }
         }

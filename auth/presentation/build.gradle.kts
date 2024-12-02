@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.uptodo.android.feature.ui)
-    alias(libs.plugins.uptodo.android.test)
+    alias(libs.plugins.uptodo.android.junit5)
 }
 
 android {
@@ -13,5 +13,4 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.auth.domain)
 
-    androidTestImplementation(projects.common.androidTest)
 }

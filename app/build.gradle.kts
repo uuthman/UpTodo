@@ -59,5 +59,4 @@ dependencies {
 
     implementation(projects.home.presentation)
 
-    androidTestImplementation(projects.common.androidTest)
 }
