@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.uuthman.auth.presentation.login.LoginScreenRoot
 import com.uuthman.auth.presentation.onboarding.OnboardingScreenRoot
 import com.uuthman.auth.presentation.welcome.WelcomeScreenRoot
 
@@ -43,10 +44,24 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         composable(route = "welcome") {
             WelcomeScreenRoot(
                 onLogin = {
-
+                    navController.navigate("login")
                 },
                 onRegister = {
 
+                }
+            )
+        }
+
+        composable(route = "login") {
+            LoginScreenRoot(
+                onLoginSuccess = {
+
+                },
+                onSignUpClick = {
+
+                },
+                onBack = {
+                    navController.navigateUp()
                 }
             )
         }

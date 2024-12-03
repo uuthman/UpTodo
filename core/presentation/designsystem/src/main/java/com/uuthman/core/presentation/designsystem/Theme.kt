@@ -16,10 +16,11 @@ val DarkColorScheme = darkColorScheme(
     tertiary = UpTodoWhite,
     primaryContainer = UpTodoPurple60,
     onPrimary = UpTodoWhite,
-    onBackground = UpTodoWhite,
+    onBackground = UpTodoGrey40,
     onSurface = UpTodoWhite,
     onSurfaceVariant = UpTodoGray70,
-    error = UpTodoRed90
+    error = UpTodoRed90,
+    outline = UpTodoGrey60
 )
 
 

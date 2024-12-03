@@ -12,6 +12,13 @@
     <string name="get_started">Get Started</string>
     <string name="next">Next</string>
     <string name="login_to_your_account">Please login to your account or create new account to continue</string>
-    <string name="login">LOGIN</string>
+    <string name="login">Login</string>
     <string name="create_account">CREATE ACCOUNT</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter your Email</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter your Password</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+
 </resources>
