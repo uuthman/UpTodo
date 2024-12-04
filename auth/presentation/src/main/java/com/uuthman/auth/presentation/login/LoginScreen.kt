@@ -1,5 +1,6 @@
 package com.uuthman.auth.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -33,6 +36,7 @@ import com.uuthman.core.presentation.designsystem.components.UpTodoPasswordTextF
 import com.uuthman.core.presentation.designsystem.components.UpTodoScaffold
 import com.uuthman.core.presentation.designsystem.components.UpTodoTextField
 import com.uuthman.core.presentation.designsystem.components.UpTodoToolbar
+import com.uuthman.core.presentation.ui.ObserveAsEvents
 
 @Composable
 fun LoginScreenRoot(
@@ -41,6 +45,32 @@ fun LoginScreenRoot(
     onSignUpClick: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when(event) {
+            is LoginEvent.Error -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    event.error.asString(context),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            LoginEvent.LoginSuccess -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    R.string.youre_logged_in,
+                    Toast.LENGTH_LONG
+                ).show()
+
+                onLoginSuccess()
+            }
+        }
+    }
+
     LoginScreen(
         state = viewModel.state,
         onAction = { action ->
@@ -112,7 +142,7 @@ private fun LoginScreen(
                 isLoading = state.isLoggingIn,
                 enabled = state.canLogin && !state.isLoggingIn,
                 onClick = {
-
+                    onAction(LoginAction.OnLoginClick)
                 }
             )
 

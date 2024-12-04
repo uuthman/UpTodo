@@ -32,6 +32,12 @@ androixTestRunner = "1.6.2"
 coroutines-test = "1.8.1"
 turbine = "1.1.0"
 junit5-compose = "1.4.0"
+firebase = "4.4.2"
+firebaseBom = "33.6.0"
+kotlinx-serialization = "1.6.3"
+securityCryptoKtx = "1.1.0-alpha06"
+
+
 
 
 # Project versions
@@ -67,7 +73,6 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines"}
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -77,6 +82,19 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android" , version.re
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hilt"}
 hilt-navigation = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNav"}
 desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines"}
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutines"}
+
+
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
+firebase-analytics = {group = "com.google.firebase", name = "firebase-analytics", version = "unspecified"}
+firebase-auth = {group = "com.google.firebase", name = "firebase-auth", version = "unspecified"}
+
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
+
+androidx-security-crypto-ktx = { module = "androidx.security:security-crypto-ktx", version.ref = "securityCryptoKtx" }
 
 
 #Test
@@ -117,6 +135,8 @@ hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 mannodermaus-android-junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "mannodermaus"}
+firebase = { id = "com.google.gms.google-services", version.ref = "firebase"}
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 uptodo-android-application-compose = { id = "uptodo.android.application.compose", version = "unspecified"}
 uptodo-android-application = { id = "uptodo.android.application", version = "unspecified"}
@@ -131,7 +151,13 @@ uptodo-android-junit5 = { id = "uptodo.android.junit5", version = "unspecified"}
 uptodo-android-hilt-test = { id = "uptodo.android.hilt.test", version = "unspecified"}
 
 
+
 [bundles]
+firebase = [
+    "firebase-analytics",
+    "firebase-auth"
+]
+
 compose = [
     "androidx-activity-compose",
     "androidx-lifecycle-runtime-compose",

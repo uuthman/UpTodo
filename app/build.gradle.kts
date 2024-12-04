@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.uptodo.android.application.compose)
     alias(libs.plugins.uptodo.android.hilt)
+    alias(libs.plugins.firebase)
 }
 
 android {
@@ -8,8 +9,6 @@ android {
 
 
     defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -46,6 +45,8 @@ dependencies {
     // Timber
     implementation(libs.timber)
 
+    // Crypto
+    implementation(libs.androidx.security.crypto.ktx)
 
     implementation(projects.core.presentation.designsystem)
     implementation(projects.core.presentation.ui)

@@ -1,6 +1,8 @@
 package com.uuthman.auth.data.di
 
+import com.uuthman.auth.data.AuthRepositoryImpl
 import com.uuthman.auth.data.EmailPatternValidator
+import com.uuthman.auth.domain.AuthRepository
 import com.uuthman.auth.domain.PatternValidator
 import dagger.Binds
 import dagger.Module
@@ -17,4 +19,10 @@ abstract class ValidatorModule {
     abstract fun bindPatternValidator(
         emailPatternValidator: EmailPatternValidator
     ): PatternValidator
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        authRepositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
 }

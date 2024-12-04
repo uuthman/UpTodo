@@ -9,4 +9,7 @@ plugins {
     alias(libs.plugins.room) apply false
     alias(libs.plugins.hiltAndroid) apply false
     alias(libs.plugins.mannodermaus.android.junit5) apply false
+    alias(libs.plugins.firebase) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+
 }

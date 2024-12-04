@@ -1,5 +1,6 @@
 package com.uuthman.auth.data.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.uuthman.auth.data.EmailPatternValidator
 import com.uuthman.auth.domain.PatternValidator
 import com.uuthman.auth.domain.UserDataValidator
@@ -18,4 +19,8 @@ object AuthDataModule {
     fun provideUserDataValidator(patternValidator: PatternValidator): UserDataValidator{
         return UserDataValidator(patternValidator)
     }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 }
