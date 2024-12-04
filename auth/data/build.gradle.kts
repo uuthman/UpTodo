@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.uptodo.android.library)
     alias(libs.plugins.uptodo.android.hilt)
+    alias(libs.plugins.uptodo.android.junit5)
 
 }
 
@@ -15,4 +16,7 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+
+    testImplementation(libs.kotlinx.coroutines.play.services)
+    testImplementation(projects.core.test)
 }

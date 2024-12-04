@@ -4,5 +4,6 @@ plugins {
 }
 
 dependencies {
-
+    implementation(projects.core.domain)
+    implementation(libs.coroutines.test)
 }
