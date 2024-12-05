@@ -10,7 +10,6 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
-import com.uuthman.core.domain.SessionStorage
 import com.uuthman.core.domain.util.DataError
 import com.uuthman.core.domain.util.Result
 import com.uuthman.core.test.SessionStorageFake
@@ -21,7 +20,6 @@ import io.mockk.mockkStatic
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -59,7 +57,7 @@ class AuthRepositoryImplTest {
 
 
         coEvery {
-            firebaseAuth.signInWithEmailAndPassword("uthman@","password123")
+            firebaseAuth.signInWithEmailAndPassword("uthman@","password123").await()
         } throws exception
 
         val result = repositoryImpl.login("uthman@","password123")
@@ -79,7 +77,7 @@ class AuthRepositoryImplTest {
 
 
         coEvery {
-            firebaseAuth.signInWithEmailAndPassword("invalid@credential.com","password123")
+            firebaseAuth.signInWithEmailAndPassword("invalid@credential.com","password123").await()
         } throws exception
 
         val result = repositoryImpl.login("invalid@credential.com","password123")
@@ -119,5 +117,43 @@ class AuthRepositoryImplTest {
         assertThat(authInfo).isNotNull()
         assertThat(authInfo?.email).isEqualTo("uthman@gmail.com")
         assertThat(authInfo?.userId).isEqualTo("123456")
+    }
+
+    @Test
+    fun `register throws email already in use exception`() = runTest {
+        val exception = FirebaseAuthException(
+            "ERROR_EMAIL_ALREADY_IN_USE",
+            "The email address is already in use by another account."
+        )
+
+        coEvery {
+            firebaseAuth.createUserWithEmailAndPassword("test@example.com", "password123").await()
+        } throws exception
+
+
+        val result = repositoryImpl.register("test@example.com", "password123")
+
+        assertThat(result is Result.Error).isTrue()
+        val error = (result as Result.Error).error
+        assertThat(error == DataError.Network.EMAIL_ALREADY_EXISTS).isTrue()
+    }
+
+    @Test
+    fun `register returns success`() = runTest {
+
+        val mockTask = mockk<Task<AuthResult>>(relaxed = true) {
+            every { isSuccessful } returns true
+            every { result } returns mockAuthResult
+            every { exception } returns null
+        }
+
+        coEvery { firebaseAuth.createUserWithEmailAndPassword("uthman@gmail.com", "password123") } returns mockTask
+
+        coEvery { mockTask.await() } returns mockAuthResult
+
+        val result = repositoryImpl.register("uthman@gmail.com","password123")
+
+
+        assertThat(result is Result.Success).isTrue()
     }
 }
